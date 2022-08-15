@@ -35,12 +35,6 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
         boolean encontrou = false; 
         int metade = contador / 2 ; 
         int valorMetade = array.get(metade);
-        System.out.println("valor metade: " + metade);
-        System.out.println("valor valormetade: " + valorMetade);
-        System.out.println("valor busca: " + busca);
-        System.out.println("valor contador: " + contador);
-        System.out.println("valor array: " + array.get(metade));
-
         if(valorMetade >= busca){
             for(int i = metade; i< contador; i--){
                 if(array.get(i) == busca){
