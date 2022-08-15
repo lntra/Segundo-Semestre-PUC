@@ -1,0 +1,16 @@
+•O que o código abaixo faz?
+
+Ele pega os valores do char enviado e o compara com uma série de números que representam letras e retorna true caso haja correspondência.
+
+•Qual a diferença entre os dois métodos abaixo?
+
+A diferença é a ordem de execução, o i-- primeiro retorna o valor original e faz a diminuição e o --i primeiro decrementa, depois retorna o valor
+
+•O que o programa abaixo mostra na tela?
+
+Aparecerá na tela uma soma de duração infinita até o limite de cada variável.
+
+•Por que o código abaixo imprime [46-11]
+
+O operador << ou >> faz com que os valores dados, nesse caso, 1, mova os bits do valor x ou y.
+
