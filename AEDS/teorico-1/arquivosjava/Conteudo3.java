@@ -1,11 +1,6 @@
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.time.ZoneId;
-import java.util.RandomAccess;
-import java.util.Scanner;
-import java.util.zip.ZipOutputStream;
 
 public class Conteudo3 {
     public static void main(String[] args) throws Exception{

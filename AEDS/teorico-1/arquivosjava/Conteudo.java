@@ -1,9 +1,5 @@
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.ZoneId;
-import java.util.Scanner;
-import java.util.zip.ZipOutputStream;
 
 public class Conteudo {
     public static void main(String[] args) {
