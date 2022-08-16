@@ -1,0 +1,1 @@
+nome: Exemplo frase: Olá a todos
