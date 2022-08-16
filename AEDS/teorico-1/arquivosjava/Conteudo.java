@@ -5,13 +5,15 @@ import java.time.ZoneId;
 import java.util.Scanner;
 import java.util.zip.ZipOutputStream;
 
-public class Leituradenome3 {
+public class Conteudo {
     public static void main(String[] args) {
-        File nomeArquivo = new File("meunome5.txt");
-        String nomeDoArquivo = nomeArquivo.getName();
+        String nome = "arquivoDeLeitura6.txt";
+        Arq.openRead(nome);
+        String texto = Arq.readAll();
+
         try {
-            FileWriter arquivoRecebe = new FileWriter("recebenome5.txt");
-            arquivoRecebe.write(nomeDoArquivo);
+            FileWriter arquivoRecebe = new FileWriter("recebenome6.txt");
+            arquivoRecebe.write(texto);
             arquivoRecebe.close();
         } catch (IOException e) {
             System.out.println("Erro");
