@@ -1,9 +1,7 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.plaf.metal.MetalScrollBarUI;
 
   public class Array3 {
 
