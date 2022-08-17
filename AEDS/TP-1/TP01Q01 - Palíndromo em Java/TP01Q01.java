@@ -14,10 +14,10 @@ class TP01Q01 {
             frase = frase + s.charAt(i);  
          }
        if (s.equals(frase)) {
-            resp = "Sim";
+            resp = "SIM";
          }
        else {
-             resp = "Não"; 
+             resp = "NAO"; 
          } 
           return resp;
        } 
