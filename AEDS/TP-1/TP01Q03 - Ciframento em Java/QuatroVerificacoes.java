@@ -69,16 +69,16 @@ public class QuatroVerificacoes {
             System.out.println("Nao ");
         }
         if(isLetra(s,1)){
-            System.out.print("Sim ");
+            System.out.println("Sim ");
         }
         else{
-            System.out.print("Nao ");
+            System.out.println("Nao ");
         }
         if(isInteiro(s)){
-            System.out.print("Sim");
+            System.out.println("Sim");
         }
         else{
-            System.out.print("Nao");
+            System.out.println("Nao");
         }
         return null;
     }
