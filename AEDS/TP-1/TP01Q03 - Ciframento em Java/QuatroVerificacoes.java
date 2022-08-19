@@ -54,20 +54,22 @@ public class QuatroVerificacoes {
      } 
 
     public static boolean isInteiro(String s,int caminho){
+        Boolean resposta = false;
         if(s == null){
-            return false;
+            return resposta;
         }
         if(caminho == 1){
             try{
                 int valor = Integer.parseInt(s);
              } catch (NumberFormatException e) {
-                 return false;
+                 return resposta;
              }
+             resposta = true;
         }
         else if (caminho == 0){
             isReal(s);
         }
-        return true;
+        return resposta;
     } 
 
     public static boolean isReal(String s){
