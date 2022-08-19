@@ -11,9 +11,9 @@ void isPalindromo(char *s){
   int posicao = 0;
   int controlador = strlen(s);
   for(int i = 0 ; i < controlador; i++) {
-    frase[i] = s[controlador - i - 1];
+    frase[i] = s[controlador - i - 1]; //s precisa ser verificado a partir do fim até o começo, portanto controlador - i - 1
   }
-  if (!strcmp(frase, s)) {
+  if (!strcmp(frase, s))  { // se frase, construida a partir do fim de s, for igual a s então é palindromo
     printf("SIM\n");
   }
   else {
