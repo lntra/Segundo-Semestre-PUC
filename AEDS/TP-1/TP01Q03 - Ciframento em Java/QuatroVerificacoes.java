@@ -6,7 +6,7 @@ public class QuatroVerificacoes {
         return (s.length() == 3 && s.charAt(0) == 'F' && s.charAt(1) == 'I' && s.charAt(2) == 'M');
      }
 
-    public static boolean isVogal(String s) {
+    public static boolean isVogal(String s, int caminho) {
         int verificador = 0;
         char[] c = s.toCharArray();
         Boolean resposta = false;
@@ -16,10 +16,12 @@ public class QuatroVerificacoes {
                 verificador++;
             }
         }
-        if(verificador == s.length()){
+        if(verificador == s.length() && caminho == 1){
             return resposta = true;
         }
-        System.out.println(resposta);
+        else if(verificador != s.length() && caminho == 0){
+            resposta = isConsoante(s);
+        }
         return resposta;
     }
 
@@ -32,17 +34,17 @@ public class QuatroVerificacoes {
         char[] c = s.toCharArray();
         Boolean resposta = false;
         for(int i = 0; i < s.length(); i++){
-            if(c[i] >= 'A' && c[i] <='Z' || c[i] >='a' && c[i] <='Z'){
+            char c1 = Character.toUpperCase(c[i]);
+            if(c1 >= 'A' && c1 <='Z'){
                 verificador++;
             }
         }
         if(verificador == s.length()){
             if(vogalConsoante == 0){
-               resposta = isVogal(s);
-               System.out.println(resposta);
+               resposta = isVogal(s,1);
             }
             if(vogalConsoante == 1){
-                resposta =isConsoante(s);
+                resposta =isVogal(s,0);
             }
         }
         return (resposta);
@@ -60,26 +62,36 @@ public class QuatroVerificacoes {
         return true;
     } 
 
+    public static boolean isReal(String s){
+        return false;
+    } 
 
     public static Void verificacoes (String s){
         if(isLetra(s,0)){
-            System.out.println("Sim ");
+            System.out.print("SIM ");
         }
         else{
-            System.out.println("Nao ");
+            System.out.print("NAO ");
         }
         if(isLetra(s,1)){
-            System.out.println("Sim ");
+            System.out.print("SIM ");
         }
         else{
-            System.out.println("Nao ");
+            System.out.print("NAO ");
         }
         if(isInteiro(s)){
-            System.out.println("Sim");
+            System.out.print("SIM ");
         }
         else{
-            System.out.println("Nao");
+            System.out.print("NAO ");
         }
+        if(isReal(s)){
+            System.out.print("SIM" + "\r\n");
+        }
+        else{
+            System.out.print("NAO" + "\r\n");
+        }
+        
         return null;
     }
     public static void main(String[] args) {
