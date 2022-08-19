@@ -28,7 +28,6 @@ public class QuatroVerificacoes {
     }
 
     public static boolean isConsoante(String s) {
-        Boolean resposta = false;
         return true;
     }
 
@@ -38,13 +37,13 @@ public class QuatroVerificacoes {
         Boolean resposta = false;
         for(int i = 0; i < s.length(); i++){
             char c1 = Character.toUpperCase(c[i]);
-            if(c1 >= 'A' && c1 <='Z'){
-                verificador++;
-            }
+                if(c1 >= 'A' && c1 <='Z'){
+                    verificador++;
+                }
         }
         if(verificador == s.length()){
             if(vogalConsoante == 0){
-               resposta = isVogal(s,1);
+               resposta = isVogal(s,1); //caminho é necessário para não repetir as mesmas verificacões
             }
             if(vogalConsoante == 1){
                 resposta =isVogal(s,0);
@@ -53,7 +52,7 @@ public class QuatroVerificacoes {
         return (resposta);
      } 
 
-    public static boolean isInteiro(String s,int caminho){
+    public static boolean isInteiro(String s,int caminho){ //tenta dar parse em uma string, se funcionar então é true
         Boolean resposta = false;
         if(s == null){
             return resposta;
@@ -61,9 +60,9 @@ public class QuatroVerificacoes {
         if(caminho == 1){
             try{
                 int valor = Integer.parseInt(s);
-             } catch (NumberFormatException e) {
-                 return resposta;
-             }
+                } catch (NumberFormatException e) {
+                    return resposta;
+                }
              resposta = true;
         }
         else if (caminho == 0){
@@ -74,10 +73,10 @@ public class QuatroVerificacoes {
 
     public static boolean isReal(String s){
         try{
-            double valor = Double.parseDouble(s);
-         } catch (NumberFormatException e) {
-             return false;
-         }
+            double valor = Double.parseDouble(s); 
+            } catch (NumberFormatException e) {
+                return false;
+            }
         return true;
     } 
 
@@ -88,25 +87,27 @@ public class QuatroVerificacoes {
         else{
             System.out.print("NAO ");
         }
+
         if(isLetra(s,1)){
             System.out.print("SIM ");
         }
         else{
             System.out.print("NAO ");
         }
+
         if(isInteiro(s, 0)){
             System.out.print("SIM ");
         }
         else{
             System.out.print("NAO ");
         }
+
         if(isInteiro(s, 1)){
             System.out.print("SIM" + "\r\n");
         }
         else{
             System.out.print("NAO" + "\r\n");
         }
-        
         return null;
     }
     public static void main(String[] args) {
