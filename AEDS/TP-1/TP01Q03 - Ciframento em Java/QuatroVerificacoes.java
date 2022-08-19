@@ -10,22 +10,25 @@ public class QuatroVerificacoes {
         int verificador = 0;
         char[] c = s.toCharArray();
         Boolean resposta = false;
+        Boolean consoante = true;
         for(int i = 0; i < s.length(); i++){
             char c1 = Character.toUpperCase(c[i]);
-            if (c1 =='A' || c1 =='E' || c1 =='I' || c1 =='O' || c1 =='U'){
+            if (c1 =='A' || c1 =='E' || c1 =='I' || c1 =='O' || c1 =='U'){ // se conter alguma vogal então não é consoante
                 verificador++;
+                consoante = false;
             }
         }
-        if(verificador == s.length() && caminho == 1){
+        if(verificador == s.length() && caminho == 1){ // se estamos verificando vogal (1) e todos são vogais então é true
             return resposta = true;
         }
-        else if(verificador != s.length() && caminho == 0){
+        else if(verificador != s.length() && caminho == 0 && consoante == true){ // se estamos verificando consoante e não é igual a vogal então é true
             resposta = isConsoante(s);
         }
         return resposta;
     }
 
     public static boolean isConsoante(String s) {
+        Boolean resposta = false;
         return true;
     }
 
@@ -50,20 +53,30 @@ public class QuatroVerificacoes {
         return (resposta);
      } 
 
-    public static boolean isInteiro(String s){
+    public static boolean isInteiro(String s,int caminho){
         if(s == null){
             return false;
         }
-        try{
-           int valor = Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
+        if(caminho == 1){
+            try{
+                int valor = Integer.parseInt(s);
+             } catch (NumberFormatException e) {
+                 return false;
+             }
+        }
+        else if (caminho == 0){
+            isReal(s);
         }
         return true;
     } 
 
     public static boolean isReal(String s){
-        return false;
+        try{
+            double valor = Double.parseDouble(s);
+         } catch (NumberFormatException e) {
+             return false;
+         }
+        return true;
     } 
 
     public static Void verificacoes (String s){
@@ -79,13 +92,13 @@ public class QuatroVerificacoes {
         else{
             System.out.print("NAO ");
         }
-        if(isInteiro(s)){
+        if(isInteiro(s, 0)){
             System.out.print("SIM ");
         }
         else{
             System.out.print("NAO ");
         }
-        if(isReal(s)){
+        if(isInteiro(s, 1)){
             System.out.print("SIM" + "\r\n");
         }
         else{
