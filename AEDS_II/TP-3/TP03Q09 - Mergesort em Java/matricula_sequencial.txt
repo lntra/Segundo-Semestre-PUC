@@ -1,0 +1,1 @@
+800ms Comparacoes: 74 Movimentacoes: 0

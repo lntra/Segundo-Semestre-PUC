@@ -1,0 +1,1 @@
+539ms	Comparacoes: 648 Movimentacoes: 1437	
