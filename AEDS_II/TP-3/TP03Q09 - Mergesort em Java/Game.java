@@ -183,11 +183,11 @@ class Lista {
         Game[] a2 = new Game[n2];
 
         for (i = 0; i < n1; i++){
-            a1[i] = array[esq + i].clone();
+            a1[i] = array[esq + i];
         }
 
         for (j = 0; j < n2; j++){
-            a2[j] = array[meio + 1 + j].clone();
+            a2[j] = array[meio + 1 + j];
         }
 
         i = 0; 
@@ -195,11 +195,11 @@ class Lista {
         k = esq; 
         while (i < n1 && j < n2) {
             if (a1[i].getUpvotes() <= a2[j].getUpvotes()) {
-                array[k] = a1[i].clone();
+                array[k] = a1[i];
                 movimentacao++;
                 i++;
             } else {
-                array[k] = a2[j].clone();
+                array[k] = a2[j];
                 movimentacao++;
                 j++;
             }
@@ -207,14 +207,14 @@ class Lista {
         }
         
         while (i < n1) {
-            array[k] = a1[i].clone();
+            array[k] = a1[i];
             movimentacao++;
             i++;
             k++;
         }
         
         while (j < n2) {
-            array[k] = a2[j].clone();
+            array[k] = a2[j];
             movimentacao++;
             j++;
             k++;
@@ -707,7 +707,7 @@ public class Game {
         String delims = "[,]";
         Boolean continuar = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(
-             "/tmp/" + nomeArquivo))){
+            "/tmp/" + nomeArquivo))){
             while(continuar == true){
                String jogo = reader.readLine();
                String[] tokens = jogo.split(delims);

@@ -346,6 +346,7 @@ game str_to_game(string *);
 game chararr_to_game(char *);
 void game_print(game *);
 void game_read_csv(game *, size_t *, size_t);
+void game_sort(game *, size_t);
 char *avgpt_to_chararr (unsigned);
 
 // ----------------------------------- game.c ----------------------------------- //
@@ -657,7 +658,9 @@ void game_read_csv(game *games, size_t *ids, size_t ids_len)
     }
     fclose(f); // closing the file
 }
-
+int game_compare(game *,game *){
+    return 0;
+}
 // ------------------------------------ main ------------------------------------ //
 
 // Uses strcmp to check if 
@@ -698,7 +701,7 @@ int main(void)
     if (games_sz > 0) {
         // Calls function to read from file and populate array of games
         game_read_csv(games, ids, games_sz);
-        
+        qsort(games,sizeof(ids),sizeof(game),game_compare);
         // Prints the games read and frees the heap allocated memory
         for (size_t i = 0; i < games_sz; i++) {
             game_print(games + i);
