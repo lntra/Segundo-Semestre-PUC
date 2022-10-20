@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 class Lista {
-	private Game[] array;
+	private Game[] games;
 	private int n;
     private int movimentacao;
     private int comparacao;
@@ -26,7 +26,7 @@ class Lista {
 	 * @param tamanho Tamanho da lista.
 	 */
 	public Lista(int tamanho) {
-		array = new Game[tamanho];
+		games = new Game[tamanho];
 		n = 0;
         movimentacao = 0;
         comparacao = 0;
@@ -39,12 +39,12 @@ class Lista {
 	 * @param Elemento a ser inserido.
 	 */
 	public boolean inserirInicio(Game item) {
-		if (n < array.length) {
-			// Desloca elementos para o fim do array
+		if (n < games.length) {
+			// Desloca elementos para o fim do games
 			for (int i = n; i > 0; i--)
-				array[i] = array[i - 1];
+				games[i] = games[i - 1];
 
-			array[0] = item;
+			games[0] = item;
 			n++;
 			return true;
 		}
@@ -58,8 +58,8 @@ class Lista {
 	 */
 	public boolean inserirFim(Game item) {
 		// validar insercao
-		if (n < array.length) {
-			array[n] = item;
+		if (n < games.length) {
+			games[n] = item;
 			n++;
 			return true;
 		}
@@ -76,12 +76,12 @@ class Lista {
 	public boolean inserir(Game item, int pos) {
 
 		// validar insercao
-		if (n < array.length && pos >= 0 && pos <= n) {
-			// Desloca elementos para o fim do array
+		if (n < games.length && pos >= 0 && pos <= n) {
+			// Desloca elementos para o fim do games
 			for (int i = n; i > pos; i--)
-				array[i] = array[i - 1];
+				games[i] = games[i - 1];
 
-			array[pos] = item;
+			games[pos] = item;
 			n++;
 			return true;
 		}
@@ -96,11 +96,11 @@ class Lista {
 	 */
 	public Game removerInicio() {
 		if (n > 0) {
-			Game item = array[0];
+			Game item = games[0];
 			n--;
 
 			for (int i = 0; i < n; i++)
-				array[i] = array[i + 1];
+				games[i] = games[i + 1];
 
 			return item;
 		}
@@ -114,7 +114,7 @@ class Lista {
 	 */
 	public Game removerFim() {
 		if (n > 0)
-			return array[--n];
+			return games[--n];
 		return null;
 	}
 
@@ -127,11 +127,11 @@ class Lista {
 	 */
 	public Game remover(int pos) {
 		if (n > 0 && pos >= 0 && pos < n) {
-			Game item = array[pos];
+			Game item = games[pos];
 			n--;
 
 			for (int i = pos; i < n; i++)
-				array[i] = array[i + 1];
+				games[i] = games[i + 1];
 
 			return item;
 		}
@@ -143,14 +143,14 @@ class Lista {
 	 */
 	public void mostrar() {
 		for (int i = 0; i < n; i++) {
-			array[i].imprimir();
+			games[i].imprimir();
 		}
 	}
 
     public void swap(int i, int j) {
-        Game temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        Game temp = games[i];
+        games[i] = games[j];
+        games[j] = temp;
      }
 
 	/**
@@ -163,10 +163,10 @@ class Lista {
       //Alterar o vetor ignorando a posicao zero
       Game[] tmp = new Game[n+1];
       for(int i = 0; i < n; i++){
-         tmp[i+1] = array[i];
+         tmp[i+1] = games[i];
          movimentacao++;
       }
-      array = tmp;
+      games = tmp;
 
       //Contrucao do heap
       for(int tamHeap = 2; tamHeap <= n; tamHeap++){
@@ -182,10 +182,10 @@ class Lista {
       }
 
       //Alterar o vetor para voltar a posicao zero
-      tmp = array;
-      array = new Game[n];
+      tmp = games;
+      games = new Game[n];
       for(int i = 0; i < n; i++){
-         array[i] = tmp[i+1];
+         games[i] = tmp[i+1];
          movimentacao++;
       }
    }
@@ -193,7 +193,7 @@ class Lista {
 
    public void construir(int tamHeap){
       comparacao++;
-      for(int i = tamHeap; i > 1 && array[i].getReleaseDate().compareTo(array[i/2].getReleaseDate()) > 0; i /= 2){
+      for(int i = tamHeap; i > 1 && games[i].getReleaseDate().compareTo(games[i/2].getReleaseDate()) > 0; i /= 2){
          swap(i, i/2);
          movimentacao+=3;
       }
@@ -205,7 +205,7 @@ class Lista {
       while(i <= (tamHeap/2)){
          int filho = getMaiorFilho(i, tamHeap);
          comparacao++;
-         if(array[i].getReleaseDate().compareTo(array[filho].getReleaseDate()) < 0){
+         if(games[i].getReleaseDate().compareTo(games[filho].getReleaseDate()) < 0){
             swap(i, filho);
             movimentacao+=3;
             i = filho;
@@ -218,7 +218,7 @@ class Lista {
    public int getMaiorFilho(int i, int tamHeap){
       int filho;
       comparacao++;
-      if (2*i == tamHeap || array[2*i].getReleaseDate().compareTo(array[2*i+1].getReleaseDate()) > 0){
+      if (2*i == tamHeap || games[2*i].getReleaseDate().compareTo(games[2*i+1].getReleaseDate()) > 0){
          filho = 2*i;
       } else {
          filho = 2*i + 1;

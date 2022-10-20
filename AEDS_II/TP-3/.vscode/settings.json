@@ -1,7 +1,9 @@
 {
     "files.associations": {
         "concepts": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "typeinfo": "c",
+        "chrono": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

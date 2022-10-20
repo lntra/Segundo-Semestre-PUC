@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Locale;
 
 class Lista {
-	private Game[] array;
+	private Game[] games;
 	private int n;
     private int movimentacao;
     private int comparacao;
@@ -26,7 +26,7 @@ class Lista {
 	 * @param tamanho Tamanho da lista.
 	 */
 	public Lista(int tamanho) {
-		array = new Game[tamanho];
+		games = new Game[tamanho];
 		n = 0;
         movimentacao = 0;
         comparacao = 0;
@@ -39,12 +39,12 @@ class Lista {
 	 * @param Elemento a ser inserido.
 	 */
 	public boolean inserirInicio(Game item) {
-		if (n < array.length) {
-			// Desloca elementos para o fim do array
+		if (n < games.length) {
+			// Desloca elementos para o fim do games
 			for (int i = n; i > 0; i--)
-				array[i] = array[i - 1];
+				games[i] = games[i - 1];
 
-			array[0] = item;
+			games[0] = item;
 			n++;
 			return true;
 		}
@@ -58,8 +58,8 @@ class Lista {
 	 */
 	public boolean inserirFim(Game item) {
 		// validar insercao
-		if (n < array.length) {
-			array[n] = item;
+		if (n < games.length) {
+			games[n] = item;
 			n++;
 			return true;
 		}
@@ -76,12 +76,12 @@ class Lista {
 	public boolean inserir(Game item, int pos) {
 
 		// validar insercao
-		if (n < array.length && pos >= 0 && pos <= n) {
-			// Desloca elementos para o fim do array
+		if (n < games.length && pos >= 0 && pos <= n) {
+			// Desloca elementos para o fim do games
 			for (int i = n; i > pos; i--)
-				array[i] = array[i - 1];
+				games[i] = games[i - 1];
 
-			array[pos] = item;
+			games[pos] = item;
 			n++;
 			return true;
 		}
@@ -96,11 +96,11 @@ class Lista {
 	 */
 	public Game removerInicio() {
 		if (n > 0) {
-			Game item = array[0];
+			Game item = games[0];
 			n--;
 
 			for (int i = 0; i < n; i++)
-				array[i] = array[i + 1];
+				games[i] = games[i + 1];
 
 			return item;
 		}
@@ -114,7 +114,7 @@ class Lista {
 	 */
 	public Game removerFim() {
 		if (n > 0)
-			return array[--n];
+			return games[--n];
 		return null;
 	}
 
@@ -127,11 +127,11 @@ class Lista {
 	 */
 	public Game remover(int pos) {
 		if (n > 0 && pos >= 0 && pos < n) {
-			Game item = array[pos];
+			Game item = games[pos];
 			n--;
 
 			for (int i = pos; i < n; i++)
-				array[i] = array[i + 1];
+				games[i] = games[i + 1];
 
 			return item;
 		}
@@ -143,14 +143,14 @@ class Lista {
 	 */
 	public void mostrar() {
 		for (int i = 0; i < n; i++) {
-			array[i].imprimir();
+			games[i].imprimir();
 		}
 	}
 
     public void swap(int i, int j) {
-        Game temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        Game temp = games[i];
+        games[i] = games[j];
+        games[j] = temp;
      }
 
 	/**
@@ -165,17 +165,17 @@ class Lista {
   
       /**
        * Algoritmo de ordenacao Quicksort.
-      * @param int esq inicio do array a ser ordenado
-      * @param int dir fim do array a ser ordenado
+      * @param int esq inicio do games a ser ordenado
+      * @param int dir fim do games a ser ordenado
        */
       private void quicksort(int esq, int dir) {
           int i = esq, j = dir;
-          Game pivo = array[(dir+esq)/2];
+          Game pivo = games[(dir+esq)/2];
           while (i <= j) {
               comparacao++;
-              while (array[i].getReleaseDate().compareTo(pivo.getReleaseDate()) < 0) i++;
+              while (games[i].getReleaseDate().compareTo(pivo.getReleaseDate()) < 0) i++;
               comparacao++;
-              while (array[j].getReleaseDate().compareTo(pivo.getReleaseDate()) > 0) j--;
+              while (games[j].getReleaseDate().compareTo(pivo.getReleaseDate()) > 0) j--;
               if (i <= j) {
                   swap(i, j);
                   movimentacao+=3;
