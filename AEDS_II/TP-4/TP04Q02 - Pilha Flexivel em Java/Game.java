@@ -17,7 +17,7 @@ class Celula {
 	 * Construtor da classe.
 	 */
 	public Celula() {
-		this.elemento=null;
+		this.elemento = null;
 	}
 
 	/**
@@ -30,189 +30,70 @@ class Celula {
 	}
 }
 
-class Lista {
-	private Celula primeiro;
-	private Celula ultimo;
-
+class Pilha {
+	private Celula topo;
 
 	/**
-	 * Construtor da classe que cria uma lista sem elementos (somente no cabeca).
+	 * Construtor da classe que cria uma fila sem elementos.
 	 */
-	public Lista() {
-		primeiro = new Celula();
-		ultimo = primeiro;
+	public Pilha() {
+		topo = null;
 	}
 
-
 	/**
-	 * Insere um elemento na primeira posicao da lista.
-    * @param x Game elemento a ser inserido.
+	 * Insere elemento na pilha (politica FILO).
+	 * 
+	 * @param x int elemento a inserir.
 	 */
-	public void inserirInicio(Game x) {
+	public void inserir(Game x) {
 		Celula tmp = new Celula(x);
-      tmp.prox = primeiro.prox;
-		primeiro.prox = tmp;
-		if (primeiro == ultimo) {                 
-			ultimo = tmp;
+		tmp.prox = topo;
+		topo = tmp;
+		tmp = null;
+	}
+
+	/**
+	 * Remove elemento da pilha (politica FILO).
+	 * 
+	 * @return Elemento removido.
+	 * @trhows Exception Se a sequencia nao contiver elementos.
+	 */
+	public Game remover() throws Exception {
+		if (topo == null) {
+			throw new Exception("Erro ao remover!");
 		}
-      tmp = null;
-	}
-
-
-	/**
-	 * Insere um elemento na ultima posicao da lista.
-    * @param x int elemento a ser inserido.
-	 */
-	public void inserirFim(Game x) {
-		ultimo.prox = new Celula(x);
-		ultimo = ultimo.prox;
-	}
-
-
-	/**
-	 * Remove um elemento da primeira posicao da lista.
-    * @return resp int elemento a ser removido.
-	 * @throws Exception Se a lista nao contiver elementos.
-	 */
-	public Game removerInicio() throws Exception {
-		if (primeiro == ultimo) {
-			throw new Exception("Erro ao remover (vazia)!");
-		}
-
-      Celula tmp = primeiro;
-		primeiro = primeiro.prox;
-		Game resp = primeiro.elemento;
-        tmp.prox = null;
-        tmp = null;
-		return resp;
-	}
-
-
-	/**
-	 * Remove um elemento da ultima posicao da lista.
-    * @return resp int elemento a ser removido.
-	 * @throws Exception Se a lista nao contiver elementos.
-	 */
-	public Game removerFim() throws Exception {
-		if (primeiro == ultimo) {
-			throw new Exception("Erro ao remover (vazia)!");
-		} 
-
-		// Caminhar ate a penultima celula:
-      Celula i;
-      for(i = primeiro; i.prox != ultimo; i = i.prox);
-
-      Game resp = ultimo.elemento; 
-      ultimo = i; 
-      i = ultimo.prox = null;
-      
-		return resp;
-	}
-
-
-	/**
-    * Insere um elemento em uma posicao especifica considerando que o 
-    * primeiro elemento valido esta na posicao 0.
-    * @param x int elemento a ser inserido.
-	 * @param pos int posicao da insercao.
-	 * @throws Exception Se <code>posicao</code> invalida.
-	 */
-   public void inserir(Game x, int pos) throws Exception {
-
-      int tamanho = tamanho();
-
-      if(pos < 0 || pos > tamanho){
-			throw new Exception("Erro ao inserir posicao (" + pos + " / tamanho = " + tamanho + ") invalida!");
-      } else if (pos == 0){
-         inserirInicio(x);
-      } else if (pos == tamanho){
-         inserirFim(x);
-      } else {
-		   // Caminhar ate a posicao anterior a insercao
-         Celula i = primeiro;
-         for(int j = 0; j < pos; j++, i = i.prox);
-		
-         Celula tmp = new Celula(x);
-         tmp.prox = i.prox;
-         i.prox = tmp;
-         tmp = i = null;
-      }
-   }
-
-
-	/**
-    * Remove um elemento de uma posicao especifica da lista
-    * considerando que o primeiro elemento valido esta na posicao 0.
-	 * @param posicao Meio da remocao.
-    * @return resp int elemento a ser removido.
-	 * @throws Exception Se <code>posicao</code> invalida.
-	 */
-	public Game remover(int pos) throws Exception {
-      Game resp;
-      int tamanho = tamanho();
-
-		if (primeiro == ultimo){
-			throw new Exception("Erro ao remover (vazia)!");
-
-      } else if(pos < 0 || pos >= tamanho){
-			throw new Exception("Erro ao remover (posicao " + pos + " / " + tamanho + " invalida!");
-      } else if (pos == 0){
-         resp = removerInicio();
-      } else if (pos == tamanho - 1){
-         resp = removerFim();
-      } else {
-		   // Caminhar ate a posicao anterior a insercao
-         Celula i = primeiro;
-         for(int j = 0; j < pos; j++, i = i.prox);
-		
-         Celula tmp = i.prox;
-         resp = tmp.elemento;
-         i.prox = tmp.prox;
-         tmp.prox = null;
-         i = tmp = null;
-      }
-
+		Game resp = topo.elemento;
+		Celula tmp = topo;
+		topo = topo.prox;
+		tmp.prox = null;
+		tmp = null;
 		return resp;
 	}
 
 	/**
-	 * Mostra os elementos da lista separados por espacos.
+	 * Mostra os elementos separados por espacos, comecando do topo.
 	 */
 	public void mostrar() {
         int pos = 0;
-		for (Celula i = primeiro.prox; i != null; i = i.prox) {
+		for (Celula i = topo; i != null; i = i.prox) {
             System.out.print("[" + pos + "] ");
 			i.elemento.imprimir();
             pos++;
 		}
 	}
 
-	/**
-	 * Procura um elemento e retorna se ele existe.
-	 * @param x Elemento a pesquisar.
-	 * @return <code>true</code> se o elemento existir,
-	 * <code>false</code> em caso contrario.
-	 */
-	public boolean pesquisar(Game x) {
-		boolean resp = false;
-		for (Celula i = primeiro.prox; i != null; i = i.prox) {
-         if(i.elemento == x){
-            resp = true;
-            i = ultimo;
-         }
-		}
-		return resp;
+	public void mostraPilha(int pilhaNum) {
+		mostraPilha(topo, pilhaNum - 1);
 	}
 
-	/**
-	 * Calcula e retorna o tamanho, em numero de elementos, da lista.
-	 * @return resp int tamanho
-	 */
-   public int tamanho() {
-      int tamanho = 0; 
-      for(Celula i = primeiro; i != ultimo; i = i.prox, tamanho++);
-      return tamanho;
-   }
+	private void mostraPilha(Celula i, int pos) {
+		if (i != null) {
+			mostraPilha(i.prox, pos - 1);
+            System.out.print("[" + pos + "] ");
+            i.elemento.imprimir();
+		}
+	}
+
 }
 
 public class Game {
@@ -689,23 +570,30 @@ public class Game {
                 + (Float.isNaN(this.upvotes) ? "0.0% " : df.format(this.upvotes) + "% ") + avg_pt + this.developers
                 + " " + this.genres);
     }
-
     public Boolean acharID(String ids) throws FileNotFoundException{
         String nomeArquivo = "games.csv";
         String delims = "[,]";
         Boolean continuar = true;
+        String jogo = "c";
         try (BufferedReader reader = new BufferedReader(new FileReader(
-            "/tmp/" + nomeArquivo))){
+            "/tmp/" +  nomeArquivo
+        ))){
             while(continuar == true){
-               String jogo = reader.readLine();
-               String[] tokens = jogo.split(delims);
-               if(tokens[0].equals(ids)){
-                    ler(jogo); 
-                    continuar = false;
-                    return true;
+               jogo = reader.readLine();
+               if(!(jogo == null)){
+                    String[] tokens = jogo.split(delims);
+                    if(tokens[0].equals(ids)){
+                        ler(jogo); 
+                        continuar = false;
+                        return true;
+                    }
+                    else{
+                        continuar = true;
+                    }
                }
                else{
-                    continuar = true;
+                continuar = false;
+                return false;
                }
             }
         } catch (IOException e){
@@ -716,10 +604,11 @@ public class Game {
     
     public static void main(String[] args) throws Exception {
         ArrayList<String> entrada = new ArrayList<String>();
-        Lista lista = new Lista();
+        Pilha pilha = new Pilha();
         int numEntrada = 0;
         int numOpera = 0;
         int operador = 0;
+        int pilhaNum = 0;
         String nome = "";
         //Leitura da entrada padrao
         do {
@@ -729,12 +618,14 @@ public class Game {
   
         //Para cada linha de entrada, gerando uma de saida 
         for(int i = 0; i < numEntrada; i++){
-             if(!(entrada.get(i).equals(""))){
+            if(!(entrada.get(i).equals(""))){
                  Game chamaGame = new Game();
                  chamaGame.acharID(entrada.get(i));
-                 lista.inserirFim(chamaGame);
-             } 
+                 pilha.inserir(chamaGame);
+                 pilhaNum++;
+            } 
         }
+
         operador = MyIO.readInt();
         while(numOpera < operador){
             nome = MyIO.readLine();
@@ -742,34 +633,18 @@ public class Game {
             Game chamaGame = new Game();
             Boolean funciona = false;
             String tokens[] = nome.split(" ");
-            if(nome.contains("II")){
+            if(nome.contains("I")){
                 funciona = chamaGame.acharID(tokens[1]);
                 if (funciona){
-                    lista.inserirInicio(chamaGame);
+                    pilha.inserir(chamaGame);
+                    pilhaNum++;
                 }
             }
-            if(nome.contains("I*")){
-                funciona = chamaGame.acharID(tokens[2]);
-                if (funciona){
-                    lista.inserir(chamaGame, Integer.parseInt(tokens[1]));
-                }
-            }
-            if(nome.contains("IF")){
-                funciona = chamaGame.acharID(tokens[1]);
-                if (funciona){
-                    lista.inserirFim(chamaGame);
-                }
-            }
-            if(nome.contains("RI")){
-               System.out.println("(R) " +  lista.removerInicio().getName());
-            }
-            if(nome.contains("R*")){
-              System.out.println("(R) " +  lista.remover((Integer.parseInt(tokens[1]))).getName());
-            }
-            if(nome.contains("RF")){
-              System.out.println("(R) " +  lista.removerFim().getName());
+            if(nome.contains("R")){
+                System.out.println("(R) " +  pilha.remover().getName());
+                pilhaNum--;
             }
         }
-       lista.mostrar();
-       }
-     }
+        pilha.mostraPilha(pilhaNum);
+    }
+}
